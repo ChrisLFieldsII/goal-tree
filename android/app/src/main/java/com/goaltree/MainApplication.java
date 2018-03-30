@@ -3,6 +3,10 @@ package com.goaltree;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.RNFirebasePackage;
+import com.magus.fblogin.FacebookLoginPackage;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
+import com.BV.LinearGradient.LinearGradientPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -22,7 +26,11 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
-          new MainReactPackage()
+          new MainReactPackage(),
+            new RNFirebasePackage(),
+            new FacebookLoginPackage(),
+            new RNGoogleSigninPackage(),
+            new LinearGradientPackage()
       );
     }
 

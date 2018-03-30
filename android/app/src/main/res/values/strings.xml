@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Goal Tree</string>
+    <string name="facebook_app_id">985027448313708</string>
+    <string name="fb_login_protocol_scheme">fb985027448313708</string>
 </resources>

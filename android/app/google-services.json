@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "887176493284",
+    "firebase_url": "https://goal-tree-f00b7.firebaseio.com",
+    "project_id": "goal-tree-f00b7",
+    "storage_bucket": "goal-tree-f00b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:887176493284:android:38df919a1b9653e7",
+        "android_client_info": {
+          "package_name": "com.goaltree"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "887176493284-lrai6qbkf9f21dhidsf0p46la9q6fp5a.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.goaltree",
+            "certificate_hash": "33fcf31de9b6c4383657dd27a47c9f6f4c704603"
+          }
+        },
+        {
+          "client_id": "887176493284-hgljvct92hjn8q2hf5qjc12a4qdqqvfo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBeKhIkLxJwcIl4kncq8_C-4_7TL-s7yC8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "887176493284-hgljvct92hjn8q2hf5qjc12a4qdqqvfo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

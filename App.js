@@ -1,19 +1,33 @@
 import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
-import Home from './client/components/home/Home'
+import { StackNavigator } from "react-navigation"
+// my component imports
+import Welcome from './client/components/welcome/Welcome'
+import Login from './client/components/login/Login'
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        {/* <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text> */}
-        <Home />
+        <AppStack />
       </View>
     )
   }
 }
+
+const AppStack = StackNavigator(
+    {
+        welcome: {
+            screen: Welcome
+        },
+        login: {
+            screen: Login
+        },
+    },
+    {
+        initialRouteName: 'login' // <-- login for dev purposes. should be 'welcome'!
+    }
+)
 
 const styles = StyleSheet.create({
   container: {

@@ -23,6 +23,9 @@ yarn-error.log*
 /android/app/build
 /android/.gradle
 /android/build
+/android/.idea
+/android/local.properties
+*.iml
 
 # ios
 /ios
