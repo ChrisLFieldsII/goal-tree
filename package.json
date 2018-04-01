@@ -6,7 +6,8 @@
         "start": "react-native start",
         "android": "react-native run-android",
         "ios": "react-native run-ios",
-        "test": "node node_modules/jest/bin/jest.js"
+        "test": "node node_modules/jest/bin/jest.js",
+        "postinstall": "rndebugger-open"
     },
     "jest": {
         "preset": "react-native"
@@ -20,11 +21,13 @@
         "react-native-linear-gradient": "^2.4.0",
         "react-navigation": "^1.5.8",
         "react-redux": "^5.0.7",
-        "redux": "^3.7.2"
+        "redux": "^3.7.2",
+        "tcomb-form-native": "^0.6.11"
     },
     "devDependencies": {
         "babel-preset-react-native-stage-0": "^1.0.1",
         "jest-react-native": "^18.0.0",
+        "react-native-debugger-open": "^0.3.17",
         "react-test-renderer": "16.2.0"
     }
 }

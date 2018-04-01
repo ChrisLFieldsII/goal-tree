@@ -15,8 +15,7 @@ class Welcome extends React.Component {
         <Text style={[styles.text, { fontSize: 30, textAlign: 'center', }]}>Welcome to the realization of your goals!</Text>
         <View style={{ flex: 2 }}>
           <WelcomeButton text="Login" navTo="login" {...this.props} />
-          <WelcomeButton text="Register" {...this.props} />
-          <WelcomeButton text="About" {...this.props} />
+          <WelcomeButton text="About" navTo="about" {...this.props} />
         </View>
       </ImageBackground>
     )
