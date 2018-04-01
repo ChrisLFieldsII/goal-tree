@@ -9,7 +9,6 @@ import Welcome from './client/components/welcome/Welcome'
 import Login from './client/components/login/Login'
 import About from './client/components/about/About'
 import Dashboard from './client/components/dashboard/Dashboard'
-import Register from './client/components/register/Register'
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
@@ -41,9 +40,6 @@ const AppStack = StackNavigator(
     dashboard: {
       screen: Dashboard
     },
-    register: {
-      screen: Register
-    }
   },
   { // start of config obj
     initialRouteName: 'welcome',    
