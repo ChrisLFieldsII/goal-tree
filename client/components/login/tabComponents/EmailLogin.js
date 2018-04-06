@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { connect } from "react-redux";
 import { loggedIn } from "../../../redux/actions";
 import t from "tcomb-form-native";
+import firebase from 'react-native-firebase';
 
 
 // tcomb-form-native set-up
@@ -26,19 +27,32 @@ const tOptions = {
   }
 }
 
+// TODO: Add forgot password; 
 class EmailLogin extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      errorMsgs: null,
+      user: null,
+    }
+  }
+  
 
   static navigationOptions = {
     title: 'Email Login',
   };
 
   render() {
+    const { errorMsgs } = this.state;
     return (
       <View style={styles.container}>
         <Text style={styles.text}>Email Login</Text>
         <View style={{ marginLeft: 10, marginRight: 10 }}>
           <Form ref={form => this.form = form} type={User} options={tOptions} />
         </View>
+        {/* Display error msgs after form submission if any */}
+        {errorMsgs ? errorMsgs.map(msg => <Text key={msg} style={{color:'red',textAlign:'center'}}>{msg}</Text>) : null}
         <View style={{flex:1,alignItems:'center'}}>
           <TouchableOpacity style={styles.btn} onPress={this.onFormSubmit.bind(this)}>
           <View style={{flex:1,justifyContent:'center'}}>
@@ -50,10 +64,25 @@ class EmailLogin extends Component {
     );
   }
 
-  onFormSubmit() {
+  async onFormSubmit() {
     const user = this.form.getValue();
     if (user) { // if validation fails, user will be null
       console.log(user)
+      this.setState({user});
+      try {
+        const errorMsgs = [];
+        this.setState({errorMsgs});
+        let firebaseUser = await firebase.auth().signInAndRetrieveDataWithEmailAndPassword(user.email, user.password);
+        console.log(firebaseUser);
+        this.props.dispatchLoggedIn(firebaseUser);
+        this.props.navigation.navigate('Dashboard');
+      }
+      catch (err) {
+        //console.error(err);
+        const errorMsgs = [];
+        errorMsgs.push(err.message);
+        this.setState({errorMsgs});
+      }
     }
     else {
       console.log('user was null. validation failed.')
@@ -78,4 +107,10 @@ const styles = StyleSheet.create({
   }
 })
 
-export default EmailLogin;
+const mapDispatchToProps = dispatch => {
+  return {
+    dispatchLoggedIn: user => dispatch(loggedIn(user)),
+  };
+}
+
+export default connect(null,mapDispatchToProps)(EmailLogin);

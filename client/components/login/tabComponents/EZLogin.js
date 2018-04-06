@@ -14,36 +14,14 @@ class EZLogin extends Component {
   };
 
   componentDidMount() {
-    console.dir(this.props)
-    const { navigate } = this.props.navigation;
     GoogleSignin.hasPlayServices({ autoResolve: true })
       .then(() => {
         console.log('Play svcs available.');
-        this.authSubscription = firebase.auth().onAuthStateChanged(user => {
-            console.log('====================================')
-            console.log('on auth state changed');            
-            // change redux state. determines which screen shows
-            if (user) { // user is signed in
-              console.log(user);
-              console.log('redirecting...'); 
-              this.props.dispatchLoggedIn(user);
-              //navigate('dashboard'); //TODO: naviate to dashboard 
-            }
-            else { // user not signed in
-              console.log('no user signed in');
-              this.setState({loading:false,});
-            }
-            console.log('====================================')
-        });
       })
       .catch(() => {
         // disable gsignin btn or whole app?!
         console.error('Play svcs error.')
       });
-  }
-
-  componentWillUnmount() {
-    this.authSubscription()
   }
 
   render() {
@@ -55,7 +33,7 @@ class EZLogin extends Component {
         <View style={{ width: 308, height: 48 }}>
           <FBLogin style={{ paddingBottom: 30, borderRadius: 5 }} loginBehavior={FBLoginManager.LoginBehaviors.Native}
             permissions={['email', 'public_profile']} onPermissionsMissing={onPermissionsMissing}
-            onLogin={this.onFBLogin.bind(this)} onLoginFound={e => console.log(e)} onLoginNotFound={e => console.log(e)}
+            onLogin={this.onFBLogin.bind(this)} onLoginFound={this.onFBLogin.bind(this)} onLoginNotFound={e => console.log(e)}
             onLogout={e => console.log(e)} onCancel={e => console.log(e)} onError={e => console.error(e)} />
         </View>
       </View>
