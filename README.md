@@ -1,6 +1,8 @@
 # Goal Tree
 Realize your goals! 
 
+**This is the project I'm currently working on**:relaxed:
+
 Pick a start and end date (if you're up for it!) for your goal and record your progress towards it. 
 
 In the end, you will have a visual of the goals you achieved!!! Or maybe left half-baked. Either way that goal will never be forgotten and can be resumed or celebrated:tada:.
