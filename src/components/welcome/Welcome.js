@@ -4,12 +4,10 @@ import LinearGradient from 'react-native-linear-gradient';
 import { connect } from "react-redux";
 import { loggedOut } from "../../redux/actions";
 import firebase from "react-native-firebase";
+import AppBtn from '../general/AppBtn';
+import { NO_NAME } from "../../assets/utils/constants";
 
 class Welcome extends React.Component {
-
-  static navigationOptions = {
-    drawerLabel: 'Welcome',
-  }
 
   render() {
     const { loggedIn, user, navigation } = this.props;
@@ -19,8 +17,10 @@ class Welcome extends React.Component {
         {loggedIn ? <Text style={styles.greetingText}>{this.displayGreeting()}</Text> : null}
         <Text style={[styles.text, { fontSize: 30, textAlign: 'center', }]}>Welcome to the realization of your goals!</Text>
         <View style={{ flex: 2 }}>
-          {!loggedIn ? <WelcomeButton text="Login" onPress={() => navigation.navigate('Login')} /> : <WelcomeButton text="Logout" onPress={this.logout.bind(this)} />}
-          <WelcomeButton text="About" onPress={() => navigation.navigate('About')} />
+          {!loggedIn ? <AppBtn text="Login" margin={4} fontSize={25} onPress={() => navigation.navigate('Login')} /> : null}
+          {loggedIn ? <AppBtn text="Dashboard" margin={4} fontSize={25} onPress={() => navigation.navigate('Dashboard')} /> : null}
+          <AppBtn text="About" margin={4} fontSize={25} onPress={() => navigation.navigate('About')} />
+          {loggedIn ? <AppBtn text="Logout" margin={4} fontSize={25} onPress={this.logout.bind(this)} /> : null}
         </View>
       </ImageBackground>
     )
@@ -35,21 +35,10 @@ class Welcome extends React.Component {
     const { user } = this.props;
     const hour = new Date().getHours();
     console.log(hour);
-    if (hour >= 5 && hour < 12) return `Good Morning ${user.displayName}`;
-    else if (hour >= 12 && hour <= 17) return `Good Afternoon ${user.displayName}`;
-    else return `Good Evening ${user.displayName}`;
+    if (hour >= 5 && hour < 12) return `Good Morning ${user.displayName || NO_NAME}`;
+    else if (hour >= 12 && hour <= 17) return `Good Afternoon ${user.displayName || NO_NAME}`;
+    else return `Good Evening ${user.displayName || NO_NAME}`;
   }
-}
-
-const WelcomeButton = (props) => {
-  const colors = ['red', 'purple', 'blue']
-  return (
-    <TouchableOpacity style={styles.btn} onPress={props.onPress}>
-      <LinearGradient style={styles.gradient} colors={colors} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
-        <Text style={styles.btnText}>{props.text}</Text>
-      </LinearGradient>
-    </TouchableOpacity>
-  )
 }
 
 const styles = StyleSheet.create({
@@ -65,23 +54,6 @@ const styles = StyleSheet.create({
     textShadowRadius: 3,
     flex: 1,
     textAlign: 'center',
-  },
-  btn: {
-    width: 220,
-    height: 40,
-    backgroundColor: 'transparent',
-    borderRadius: 40,
-    marginBottom: 4,
-    marginTop: 4,
-  },
-  btnText: {
-    fontSize: 25,
-    color: '#f5f5f5',
-  },
-  gradient: {
-    borderRadius: 40,
-    justifyContent: 'center',
-    alignItems: 'center',
   },
   greetingText: {
     color: '#f5f5f5',

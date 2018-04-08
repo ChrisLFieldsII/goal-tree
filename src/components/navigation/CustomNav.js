@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { loggedOut } from '../../redux/actions';
 import LinearGradient from 'react-native-linear-gradient';
 import firebase from 'react-native-firebase';
-
+import AppBtn from '../general/AppBtn';
 
 
 class CustomNav extends Component {
@@ -22,13 +22,7 @@ class CustomNav extends Component {
         <ScrollView style={{flex:1}}>
           <SafeAreaView style={{flex:1}}>
               <DrawerItems {...this.props}
-                getLabel={scene => (
-                  <TouchableOpacity style={styles.drawerBtn} onPress={() => this.props.navigation.navigate(this.props.getLabel(scene))}>
-                    <LinearGradient style={styles.gradient} colors={['red', 'purple', 'blue']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
-                      <Text style={{color:'white'}}>{this.props.getLabel(scene)}</Text>
-                    </LinearGradient>
-                  </TouchableOpacity>
-                )}
+                getLabel={scene => <AppBtn margin={10} fontSize={16} height={40} onPress={() => this.props.navigation.navigate(this.props.getLabel(scene))} text={this.props.getLabel(scene)} />}
               />
               {loggedIn ? <LogoutBtn {...this.props} /> : null}
           </SafeAreaView>
@@ -43,20 +37,16 @@ const LogoutBtn = props => {
 
   const logout = async () => {
     console.log('pressed logout')
+    props.navigation.navigate('Welcome'); // must nav to Welcome before dispatching logout or else null error
     props.dispatchLoggedOut();
     await firebase.auth().signOut();
-    props.navigation.navigate('Welcome');
     console.log('user signed out')
   }
 
   return (
     <View style={{alignItems:'center', marginTop:50}}>
-      <Text style={{color:'white'}}>You are logged in.</Text>
-      <TouchableOpacity style={styles.drawerBtn} onPress={logout}>
-        <LinearGradient style={styles.gradient} colors={['red', 'purple', 'blue']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
-          <Text style={{color:'white'}}>Logout</Text>
-        </LinearGradient>
-      </TouchableOpacity>
+      <Text style={{color:'white',fontWeight:'bold'}}>You are logged in.</Text>
+      <AppBtn margin={10} fontSize={16} height={40} onPress={logout} text="Logout" />
     </View>
   );
 }

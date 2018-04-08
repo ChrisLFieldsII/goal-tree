@@ -27,7 +27,7 @@ const tOptions = {
   }
 }
 
-// TODO: Add forgot password; 
+// TODO: Add forgot password, remember me?, 
 class EmailLogin extends Component {
 
   constructor(props) {

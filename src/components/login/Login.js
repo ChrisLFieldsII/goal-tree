@@ -9,10 +9,6 @@ import firebase from 'react-native-firebase';
 
 class Login extends Component {
 
-  static navigationOptions = {
-    drawerLabel: 'Login',
-  };
-
   componentDidMount() {
     console.log('login mounted');
     const { navigate } = this.props.navigation;

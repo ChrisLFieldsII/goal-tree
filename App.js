@@ -31,17 +31,17 @@ export default class App extends React.Component {
 // TODO: refactor screens obj/config into separate file
 const AppNav = DrawerNavigator(
   {
-    Welcome: {
-      screen: Welcome
-    },
     Login: {
       screen: Login
     },
-    About: {
-      screen: About
+    Welcome: {
+      screen: Welcome
     },
     Dashboard: {
       screen: Dashboard
+    },
+    About: {
+      screen: About
     },
   },
   { // start of config obj
