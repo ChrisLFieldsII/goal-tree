@@ -10,12 +10,19 @@ const Importance = t.enums({
   M: 'MEDIUM',
   H: 'HIGH'
 });
-const GoalForm = t.struct({
+const GoalFormNoEnd = t.struct({
   name: t.String,
   desc: t.maybe(t.String),
   startDate: t.Date,
   selectEndDate: t.Boolean,
-  endDate: t.maybe(t.Date),
+  importance: Importance,
+});
+const GoalFormEnd = t.struct({
+  name: t.String,
+  desc: t.maybe(t.String),
+  startDate: t.Date,
+  selectEndDate: t.Boolean,
+  endDate: t.Date,
   importance: Importance,
 });
 const tOptions = {
@@ -25,7 +32,9 @@ const tOptions = {
       error: 'Please enter a name for your goal.',
     },
     desc: {
-      placeholder: "Enter a description if you'd like"
+      placeholder: "Enter a description if you'd like",
+      label: "Description",
+      multiline: true,
     },    
     startDate: { 
       mode:'date', 
@@ -46,16 +55,39 @@ const tOptions = {
       nullOption: { value:'', text:'Choose goal importance' }
     }
   }
-}
+};
 
 class SetGoal extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      formValue: {},
+      type: this.getFormType(GoalFormNoEnd),
+    }
+  }
+  
+
   render() {
     return (
       <ScrollView style={styles.container}>
         <Text style={styles.heading}>Set Your Goal!</Text>
-        <View style={styles.form}><Form ref={form => this.form = form} type={GoalForm} options={tOptions} /></View>
+        <View style={styles.form}>
+          <Form ref={form => this.form = form} type={this.state.type} value={this.state.formValue} onChange={this.onFormChange.bind(this)} options={tOptions} />
+        </View>
       </ScrollView>
     );
+  }
+
+  getFormType(formValue) {
+    console.log(formValue)
+    if (formValue.selectEndDate) return GoalFormEnd;
+    else return GoalFormNoEnd;
+  }
+
+  onFormChange(formValue) {
+    const type = formValue.selectEndDate !== this.state.formValue.selectEndDate ? this.getFormType(formValue) : this.state.type;
+    this.setState({formValue,type});
   }
 }
 
