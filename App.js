@@ -11,6 +11,8 @@ import About from './src/components/about/About';
 import Dashboard from './src/components/dashboard/Dashboard';
 import CustomNav from './src/components/navigation/CustomNav';
 import HamburgerBtn from './src/components/navigation/HamburgerBtn';
+import SetGoal from './src/components/goals/SetGoal';
+import ViewGoals from './src/components/goals/ViewGoals';
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
@@ -55,7 +57,13 @@ const StackNav = StackNavigator(
   {
     App: {
       screen: AppNav
-    }
+    },
+    SetGoal: {
+      screen: SetGoal
+    },
+    ViewGoals: {
+      screen: ViewGoals
+    },
   },
   {
     initialRouteName: 'App',

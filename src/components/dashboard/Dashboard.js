@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Alert } from "react-native";
 import { connect } from "react-redux";
 import { NO_NAME } from '../../assets/utils/constants';
+import AppBtn from '../general/AppBtn';
 
 
 // TODO: Add StackNav for all Dashboard possibilities
@@ -17,12 +18,14 @@ class Dashboard extends Component {
   }
 
   render() {
-    const { user, loggedIn } = this.props;
+    const { user, loggedIn, navigation } = this.props;
     let content = null
 
     if (loggedIn) content = (
       <View>
         <Text style={styles.greeting}>{`Welcome to your\nDashboard ${user.displayName || NO_NAME}`}</Text>
+        <AppBtn text="Set a Goal" margin={4} fontSize={16} height={30} onPress={() => navigation.navigate('SetGoal')} />
+        <AppBtn text="View Goals" margin={4} fontSize={16} height={30} onPress={() => navigation.navigate('ViewGoals')} />
       </View>
     )
     else content = null
@@ -36,11 +39,12 @@ class Dashboard extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //alignItems: 'center',
+    alignItems: 'center',
   },
   greeting: {
     textAlign: 'center',
-    marginTop: 10,
+    marginTop: 20,
+    marginBottom: 20,
     fontSize: 20,
   }
 });

@@ -17,10 +17,10 @@ class Welcome extends React.Component {
         {loggedIn ? <Text style={styles.greetingText}>{this.displayGreeting()}</Text> : null}
         <Text style={[styles.text, { fontSize: 30, textAlign: 'center', }]}>Welcome to the realization of your goals!</Text>
         <View style={{ flex: 2 }}>
-          {!loggedIn ? <AppBtn text="Login" margin={4} fontSize={25} onPress={() => navigation.navigate('Login')} /> : null}
-          {loggedIn ? <AppBtn text="Dashboard" margin={4} fontSize={25} onPress={() => navigation.navigate('Dashboard')} /> : null}
-          <AppBtn text="About" margin={4} fontSize={25} onPress={() => navigation.navigate('About')} />
-          {loggedIn ? <AppBtn text="Logout" margin={4} fontSize={25} onPress={this.logout.bind(this)} /> : null}
+          {!loggedIn ? <AppBtn text="Login" margin={4} fontSize={22} onPress={() => navigation.navigate('Login')} /> : null}
+          {loggedIn ? <AppBtn text="Dashboard" margin={4} fontSize={22} onPress={() => navigation.navigate('Dashboard')} /> : null}
+          <AppBtn text="About" margin={4} fontSize={22} onPress={() => navigation.navigate('About')} />
+          {loggedIn ? <AppBtn text="Logout" margin={4} fontSize={22} onPress={this.logout.bind(this)} /> : null}
         </View>
       </ImageBackground>
     )
