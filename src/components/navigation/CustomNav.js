@@ -18,13 +18,13 @@ class CustomNav extends Component {
   render() {
     const { loggedIn } = this.props;
     return (
-      <ImageBackground style={{flex:1,alignItems:'center'}} source={require('../../assets/imgs/horizon_moon.jpg')}>
+      <ImageBackground style={{flex:1,alignItems:'center'}} source={require('../../assets/imgs/shooting-star.jpg')}>
         <ScrollView style={{flex:1}}>
           <SafeAreaView style={{flex:1}}>
               <DrawerItems {...this.props}
                 getLabel={scene => (
                   <TouchableOpacity style={styles.drawerBtn} onPress={() => this.props.navigation.navigate(this.props.getLabel(scene))}>
-                    <LinearGradient style={styles.gradient} colors={['#37474F','#FF6F00','#3E2723']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
+                    <LinearGradient style={styles.gradient} colors={['red', 'purple', 'blue']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
                       <Text style={{color:'white'}}>{this.props.getLabel(scene)}</Text>
                     </LinearGradient>
                   </TouchableOpacity>
@@ -53,7 +53,7 @@ const LogoutBtn = props => {
     <View style={{alignItems:'center', marginTop:50}}>
       <Text style={{color:'white'}}>You are logged in.</Text>
       <TouchableOpacity style={styles.drawerBtn} onPress={logout}>
-        <LinearGradient style={styles.gradient} colors={['#37474F','#FF6F00','#3E2723']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
+        <LinearGradient style={styles.gradient} colors={['red', 'purple', 'blue']} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }}>
           <Text style={{color:'white'}}>Logout</Text>
         </LinearGradient>
       </TouchableOpacity>

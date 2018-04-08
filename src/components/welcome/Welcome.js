@@ -8,7 +8,7 @@ import firebase from "react-native-firebase";
 class Welcome extends React.Component {
 
   static navigationOptions = {
-    drawerLabel: 'Welcome'
+    drawerLabel: 'Welcome',
   }
 
   render() {

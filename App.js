@@ -1,15 +1,16 @@
-import React from 'react'
-import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native'
-import { DrawerNavigator, StackNavigator } from "react-navigation"
+import React from 'react';
+import { StyleSheet, Text, View, ScrollView, SafeAreaView } from 'react-native';
+import { DrawerNavigator, StackNavigator } from "react-navigation";
 import { createStore } from "redux";
-import { Provider } from 'react-redux'
-import reducer from './client/redux/reducer';
+import { Provider } from 'react-redux';
+import reducer from './src/redux/reducer';
 // my component imports
-import Welcome from './client/components/welcome/Welcome'
-import Login from './client/components/login/Login'
-import About from './client/components/about/About'
-import Dashboard from './client/components/dashboard/Dashboard'
-import CustomNav from './client/components/navigation/CustomNav'
+import Welcome from './src/components/welcome/Welcome';
+import Login from './src/components/login/Login';
+import About from './src/components/about/About';
+import Dashboard from './src/components/dashboard/Dashboard';
+import CustomNav from './src/components/navigation/CustomNav';
+import HamburgerBtn from './src/components/navigation/HamburgerBtn';
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
@@ -47,7 +48,7 @@ const AppNav = DrawerNavigator(
     initialRouteName: 'Welcome',   
     contentComponent: CustomNav,
   }
-)
+);
 
 /** Here to give permanent header for DrawerNav hamburger button to always show easily. */
 const StackNav = StackNavigator(
@@ -57,9 +58,24 @@ const StackNav = StackNavigator(
     }
   },
   {
-    initialRouteName: 'App'
+    initialRouteName: 'App',
+    navigationOptions: ({navigation}) => ({
+      headerStyle: {
+        backgroundColor: '#000000',        
+      },  
+      headerTintColor: '#FFFFFF',
+      headerLeft: <HamburgerBtn navigation={navigation} />,
+      title: 'Goal Tree',
+      headerTitleStyle: {
+        fontSize: 30,
+        fontWeight: 'bold',
+        textShadowColor: '#4d79ff',
+        textShadowOffset: { width: 3, height: 3 },
+        textShadowRadius: 3,    
+      }  
+    }),    
   }
-)
+);
 
 
 const styles = StyleSheet.create({
