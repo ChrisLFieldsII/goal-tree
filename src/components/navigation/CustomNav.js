@@ -22,7 +22,7 @@ class CustomNav extends Component {
         <ScrollView style={{flex:1}}>
           <SafeAreaView style={{flex:1}}>
               <DrawerItems {...this.props}
-                getLabel={scene => <AppBtn margin={10} fontSize={16} height={40} onPress={() => this.props.navigation.navigate(this.props.getLabel(scene))} text={this.props.getLabel(scene)} />}
+                getLabel={scene => <AppBtn margin={10} fontSize={16} height={35} onPress={() => this.props.navigation.navigate(this.props.getLabel(scene))} text={this.props.getLabel(scene)} />}
                 items={this.getDrawerItems()}
               />
               {loggedIn ? <LogoutBtn {...this.props} /> : null}

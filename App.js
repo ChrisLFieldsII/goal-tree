@@ -8,11 +8,11 @@ import reducer from './src/redux/reducer';
 import Welcome from './src/components/welcome/Welcome';
 import Login from './src/components/login/Login';
 import About from './src/components/about/About';
-import Dashboard from './src/components/dashboard/Dashboard';
 import CustomNav from './src/components/navigation/CustomNav';
 import HamburgerBtn from './src/components/navigation/HamburgerBtn';
 import SetGoal from './src/components/goals/SetGoal';
 import ViewGoals from './src/components/goals/ViewGoals';
+import DashboardNav from './src/components/dashboard/DashboardNav';
 
 const store = createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
@@ -40,16 +40,10 @@ const AppNav = DrawerNavigator(
       screen: Welcome
     },
     Dashboard: {
-      screen: Dashboard
+      screen: DashboardNav
     },
     About: {
       screen: About
-    },
-    SetGoal: {
-      screen: SetGoal,
-    },
-    ViewGoals: {
-      screen: ViewGoals
     },
   },
   { // start of config obj
