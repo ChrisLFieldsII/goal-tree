@@ -20,7 +20,7 @@ class Login extends Component {
         console.log(user);
         console.log('redirecting...'); 
         this.props.dispatchLoggedIn(user);
-        navigate('Dashboard'); //TODO: naviate to dashboard 
+        navigate('Dashboard');
       }
       else { // user not signed in
         console.log('no user signed in');

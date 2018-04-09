@@ -23,7 +23,7 @@ class ViewGoals extends Component {
         <Text style={styles.heading}>View Your Goals!</Text>
         <SectionList
           sections={this.getSections()}
-          renderItem={({item,index}) => <ListItem key={item._data.name+index} item={item} />}
+          renderItem={({item,index}) => <ListItem key={item._data.name+index} item={item} {...this.props} />}
           renderSectionHeader={({section}) => <Text style={styles.sectionText} key={section.title}>{section.title}</Text>}
           keyExtractor={({item,index}) => { if (item) return item._data.name+index; else return index; }}
           ListEmptyComponent={<View style={styles.row}><Text>No goals currently set.</Text></View>}
@@ -51,16 +51,20 @@ class ViewGoals extends Component {
   }
 }
 
+/** Component for renderItem. Think of an item as the document. */
 const ListItem = props => {
-  const { item } = props;
-  const data = item._data;
+  const { item, navigation } = props;
+  const goal = item._data;
+
   const onPress = () => {
     console.log('on list item press')
+    navigation.navigate('GoalViewer', goal);
   }
+
   return (
     <TouchableOpacity onPress={onPress}>
       <View style={styles.row}>
-        <Text>{data.name}</Text>
+        <Text>{goal.name}</Text>
       </View>
     </TouchableOpacity>
   );

@@ -5,7 +5,6 @@ import { NO_NAME } from '../../assets/utils/constants';
 import AppBtn from '../general/AppBtn';
 
 
-// TODO: Add StackNav for all Dashboard possibilities
 class Dashboard extends Component {
 
   /** Ensures only logged in users get access to Dashboard and its functions. */

@@ -30,7 +30,6 @@ export default class App extends React.Component {
 }
 
 
-// TODO: refactor screens obj/config into separate file
 const AppNav = DrawerNavigator(
   {
     Login: {
@@ -85,3 +84,4 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 })
+

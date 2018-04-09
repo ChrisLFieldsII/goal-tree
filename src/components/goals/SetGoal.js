@@ -5,6 +5,8 @@ import FormBtn from '../general/FormBtn';
 import firebase from 'react-native-firebase';
 import { connect } from 'react-redux';
 import Spinner from 'react-native-loading-spinner-overlay';
+import Goal from '../../assets/utils/classes/schemas/Goal';
+import Achievement from '../../assets/utils/classes/schemas/Achievement';
 
 // tcomb-form-native set-up
 const Form = t.form.Form;
@@ -94,7 +96,6 @@ class SetGoal extends Component {
   }
 
   getFormType(formValue) {
-    console.log(formValue)
     if (formValue.selectEndDate) return GoalFormEnd;
     else return GoalFormNoEnd;
   }
@@ -111,18 +112,11 @@ class SetGoal extends Component {
       this.setState({visible:true});
       console.log(goal);
       this.setState({goal});
-      let doc = await this.usersDb.add({
-        uid: user.uid,
-        name: goal.name,
-        desc: goal.desc,
-        startDate: goal.startDate,
-        endDate: goal.endDate,
-        importance: goal.importance,
-        achieved: false,
-        achievements: [],
-      });
+      // TODO: Add notification about first achievement!
+      let firstAchievement = new Achievement(`Started goal "${goal.name}"!`, new Date());
+      let doc = await this.usersDb.add(new Goal(user.uid, goal.name, goal.startDate, goal.importance, firstAchievement, goal.desc, goal.endDate));      
       console.log(doc)
-      this.setState({visible:false,goal:{}});
+      this.setState({visible:false});
     }
     else {
       console.log('goal was null. validation failed.');      
