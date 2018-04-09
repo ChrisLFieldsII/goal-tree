@@ -45,6 +45,12 @@ const AppNav = DrawerNavigator(
     About: {
       screen: About
     },
+    SetGoal: {
+      screen: SetGoal,
+    },
+    ViewGoals: {
+      screen: ViewGoals
+    },
   },
   { // start of config obj
     initialRouteName: 'Welcome',   
@@ -57,12 +63,6 @@ const StackNav = StackNavigator(
   {
     App: {
       screen: AppNav
-    },
-    SetGoal: {
-      screen: SetGoal
-    },
-    ViewGoals: {
-      screen: ViewGoals
     },
   },
   {

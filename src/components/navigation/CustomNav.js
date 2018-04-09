@@ -16,19 +16,27 @@ class CustomNav extends Component {
   
 
   render() {
-    const { loggedIn } = this.props;
+    const { loggedIn, items } = this.props;
     return (
       <ImageBackground style={{flex:1,alignItems:'center'}} source={require('../../assets/imgs/shooting-star.jpg')}>
         <ScrollView style={{flex:1}}>
           <SafeAreaView style={{flex:1}}>
               <DrawerItems {...this.props}
                 getLabel={scene => <AppBtn margin={10} fontSize={16} height={40} onPress={() => this.props.navigation.navigate(this.props.getLabel(scene))} text={this.props.getLabel(scene)} />}
+                items={this.getDrawerItems()}
               />
               {loggedIn ? <LogoutBtn {...this.props} /> : null}
           </SafeAreaView>
         </ScrollView>
       </ImageBackground>
     );
+  }
+
+  getDrawerItems() {
+    const { loggedIn, items } = this.props;
+    // values in arrays WILL NOT be shown in drawer
+    if (!loggedIn) return items.filter(item => !['SetGoal','ViewGoals'].includes(item.key));
+    else return items.filter(item => !['SetGoal','ViewGoals','Login'].includes(item.key));
   }
 }
 
