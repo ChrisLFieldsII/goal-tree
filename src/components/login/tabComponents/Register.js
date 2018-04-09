@@ -4,6 +4,7 @@ import t from "tcomb-form-native";
 import firebase from 'react-native-firebase';
 import { connect } from "react-redux";
 import { loggedIn } from "../../../redux/actions";
+import FormBtn from '../../general/FormBtn';
 
 // tcomb-form-native set-up
 const Form = t.form.Form;
@@ -64,11 +65,7 @@ class Register extends Component {
         {/* Display error msgs after form submission if any */}
         {errorMsgs ? errorMsgs.map(msg => <Text key={msg} style={{color:'red',textAlign:'center'}}>{msg}</Text>) : null}
         <View style={{flex:1,alignItems:'center'}}>
-          <TouchableOpacity style={styles.btn} onPress={this.onFormSubmit.bind(this)}>
-            <View style={{flex:1,justifyContent:'center'}}>
-              <Text style={{textAlign:'center',color:'whitesmoke'}}>Register Account</Text>
-            </View>
-          </TouchableOpacity>
+          <FormBtn onPress={this.onFormSubmit.bind(this)} text="Register Account" />
         </View>
       </ScrollView>
     );

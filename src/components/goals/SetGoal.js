@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { View, ScrollView, Text, StyleSheet } from "react-native";
 import t from "tcomb-form-native";
-import moment from 'moment';
+import FormBtn from '../general/FormBtn';
+import firebase from 'react-native-firebase';
+import { connect } from 'react-redux';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 // tcomb-form-native set-up
 const Form = t.form.Form;
 const Importance = t.enums({
-  L: 'LOW',
-  M: 'MEDIUM',
-  H: 'HIGH'
+  low: 'Low',
+  medium: 'Medium',
+  high: 'High'
 });
 const GoalFormNoEnd = t.struct({
   name: t.String,
@@ -39,13 +42,13 @@ const tOptions = {
     startDate: { 
       mode:'date', 
       config: {
-        format: date => moment(date).format('M/D/YYYY'), 
+        format: date => date.toLocaleDateString('en-US', {month:'numeric',day:'numeric',year:'numeric'}), 
       },
     },
     endDate: { 
       mode:'date',
       config: {
-        format: date => moment(date).format('M/D/YYYY'),
+        format: date => date.toLocaleDateString('en-US', {month:'numeric',day:'numeric',year:'numeric'}),
       }
     },
     selectEndDate: {
@@ -57,24 +60,33 @@ const tOptions = {
   }
 };
 
+/** START OF CLASS!!! */
 class SetGoal extends Component {
 
   constructor(props) {
     super(props);
+    this.usersDb = firebase.firestore().collection('users'); // store ref to db collection
     this.state = {
       formValue: {},
       type: this.getFormType(GoalFormNoEnd),
+      goal: null,
+      visible: false,
     }
   }
   
 
   render() {
+    const { visible } = this.state;
     return (
       <ScrollView style={styles.container}>
         <Text style={styles.heading}>Set Your Goal!</Text>
         <View style={styles.form}>
           <Form ref={form => this.form = form} type={this.state.type} value={this.state.formValue} onChange={this.onFormChange.bind(this)} options={tOptions} />
         </View>
+        <View style={{flex:1,alignItems:'center',marginBottom:20}}>
+          <FormBtn text="Set Goal" onPress={this.onFormSubmit.bind(this)} />
+        </View>
+        <Spinner visible={visible} cancelable={true} animation="fade" textContent={`One second...\nSaving your awesome goal!`} overlayColor="blue" />
       </ScrollView>
     );
   }
@@ -88,6 +100,31 @@ class SetGoal extends Component {
   onFormChange(formValue) {
     const type = formValue.selectEndDate !== this.state.formValue.selectEndDate ? this.getFormType(formValue) : this.state.type;
     this.setState({formValue,type});
+  }
+
+  async onFormSubmit() {
+    const { user } = this.props;
+    const goal = this.form.getValue();
+    if (goal) {
+      this.setState({visible:true});
+      console.log(goal);
+      this.setState({goal});
+      let doc = await this.usersDb.add({
+        uid: user.uid,
+        name: goal.name,
+        desc: goal.desc,
+        startDate: goal.startDate,
+        endDate: goal.endDate,
+        importance: goal.importance,
+        achieved: false,
+        achievements: [],
+      });
+      console.log(doc)
+      this.setState({visible:false});
+    }
+    else {
+      console.log('goal was null. validation failed.');      
+    }
   }
 }
 
@@ -105,6 +142,13 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginRight: 20,
   }
-})
+});
 
-export default SetGoal;
+const mapStateToProps = state => {
+  return {
+    user: state.user,
+    loggedIn: state.loggedIn
+  }
+}
+
+export default connect(mapStateToProps)(SetGoal);
