@@ -60,7 +60,9 @@ const tOptions = {
   }
 };
 
-/** START OF CLASS!!! */
+/** START OF CLASS!!!
+ * TODO: clear form after submission
+ */
 class SetGoal extends Component {
 
   constructor(props) {
@@ -120,7 +122,7 @@ class SetGoal extends Component {
         achievements: [],
       });
       console.log(doc)
-      this.setState({visible:false});
+      this.setState({visible:false,goal:{}});
     }
     else {
       console.log('goal was null. validation failed.');      

@@ -2,7 +2,14 @@ import React, { Component } from 'react';
 import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-
+/**
+ * Reps general application button.
+ *  margin=set top and bottom margin value;
+ *  fontSize=set font size;
+ *  onPress=set onPress;
+ *  text=set button text;
+ *  height=set button height;
+ */
 class AppBtn extends Component {
 
   render() {
